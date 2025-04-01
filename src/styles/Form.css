@@ -1,0 +1,240 @@
+.login-form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.login-form > form {
+    border: 1px solid rgb(219,219,219);
+    width: 25%;
+    height: fit-content;
+    padding: 25px 20px;
+    transition: all 0.5s;
+    margin: 10px 0px;
+}
+.login-form > div{
+    width: 25%;
+    text-align: center;
+    border: 1px solid rgb(219,219,219);
+    padding: 2px 20px;
+}
+.login-form > form > svg{
+    width: 175px !important;
+    height: 51px !important;
+    display: block;
+    margin: 20px auto 0px auto;
+}
+.login-form > form > p{
+    font-size: 17px;
+    color: #737373;
+    font-weight: 600;
+    padding: 0px 30px;
+}
+.inp-grp{
+    position: relative;
+}
+.inp-grp > span{
+    font-size: 12px;
+    color: rgb(105, 105, 105);
+    position: absolute;
+    top: 50%;
+    left: 13%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    transition: all 0.2s;
+}
+.inp-grp > input{
+    background-color: #FAFAFA;
+    padding: 12px 8px;
+    display: block;
+    width: 80%;
+    border-radius: 4px;
+    margin: 3px auto;
+    border: 1px solid rgb(219,219,219);
+    font-size: 12px;
+    transition: all 0.2s;
+    outline: none;
+}
+.inp-grp > .error{
+    border: 1px solid #ED4337;
+}
+.login-form > form > label{
+    font-size: 12px;
+    display: block;
+    width: 80%;
+    margin: 4px auto 12px auto;
+    padding-left: 4px;
+    color: #ED4337;
+    animation: opacity 0.4s 1;
+}
+.inp-grp > input:not(:placeholder-shown) + span{
+    transform: scale(0.85) translate(-10%,-160%);
+}
+.inp-grp > input:not(:placeholder-shown){
+    padding-top: 18px;
+}
+.inp-grp > input:focus{
+    border: 1px solid rgb(170,170,170);
+}
+.inp-grp > b{
+    position: absolute;
+    top: 50%;
+    right: 13%;
+    cursor: pointer;
+    font-size: 14px;
+    transform: translateY(-50%);
+}
+.inp-grp > b:hover{
+    color: #b6b6b6;
+}
+.login-form > form > h6{
+    font-size: 12.5px;
+    font-weight: 400;
+    color: #737373;
+    width: 85%;
+    margin: 15px auto;
+}
+.login-form > form > h6 > span{
+    color: #00376B;
+}
+.login-form > form > button{
+    width: 80%;
+    display: block;
+    color: white;
+    padding: 8px 20px;
+    font-weight: 600;
+    background-color: #0095F6;
+    border: none;
+    font-size: 13.5px;
+    border-radius: 4px;
+    position: relative;
+    margin: 10px auto;
+    height: 32px;
+}
+.login-form > form > button:hover{
+    background-color: rgb(24, 119, 242);
+    cursor: pointer;
+}
+.login-form > div > h5{
+    font-size: 14.5px;
+    font-weight: 400;
+}
+.login-form > div > h5 > span{
+    color: #0095F6;
+    font-weight: 700;
+    cursor: pointer;
+}
+.login-form > footer{
+    margin: 50px auto 10px auto;
+    width: 100%;
+    align-items: center;
+}
+button:disabled{
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+.inp-grp > svg,.inp-grp i{
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 50%;
+    right: 12%;
+    animation: opacity 0.4s 1;
+    transform: translateY(-50%);
+}
+.inp-grp .check-svg path{
+    fill: #A4A7AA !important;
+}
+.inp-grp  .cross-svg path{
+    fill: #ED4337 !important;
+}
+.forgot{
+    color: #00376B;
+    font-size: 13.5px;
+    display: block;
+    margin: 20px 0px 10px 0px;
+    text-align: center;
+    cursor: pointer;
+}
+.server-err{
+    color: #ED4956;
+    font-weight: 400;
+    width: 75%;
+    margin: 15px auto;
+    text-align: center;
+    font-size: 14.5px;
+    animation: opacity 0.4s 1;
+}
+@keyframes opacity {
+    0%{
+        opacity: 0;
+    }
+    110%{
+        opacity: 1;
+    }
+}
+
+/* ////////////////////////////////// */
+
+.verify-form{
+    text-align: center;
+}
+
+.verify-form > img{
+    display: block;
+    width: 120px;
+    margin: 0px auto;
+}
+.verify-form > h4{
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+.mail-info{
+    font-weight: 400 !important;
+    color: black !important; 
+    font-size: 14.5px !important;
+    padding: 0px 20px !important;
+}
+.mail-info > span{
+    color: #0095F6;
+    font-weight: 500;
+    cursor: pointer;
+}
+.mail-info > span:hover{
+    color: #00376B;
+}
+.verify-form > input{
+    width: 80%;
+    display: block;
+    margin: 20px auto 15px auto;
+    padding: 11px 11px;
+    border-radius: 4px;
+    background-color: #FAFAFA;
+    border: 1px solid rgb(219,219,219);
+    font-size: 14px;
+    outline: none;
+}
+.verify-form > input:focus{
+    border: 1px solid rgb(170,170,170);
+}
+.verify-form > input::placeholder{
+    color: #cacfd4;
+    font-weight: 400;
+}
+.verify-form > b{
+    color: #0095F6;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 14.5px;
+    margin: 15px 0px;
+    display: block;
+}
+.verify-form > span{
+    font-weight: 400;
+    color: #ED4337;
+    font-size: 13.5px;
+    display: block;
+    width: 80%;
+    margin: 5px auto;
+}

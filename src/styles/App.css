@@ -1,0 +1,18 @@
+*{
+  font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
+}
+body{
+  margin: 0px;
+  padding: 0px;
+}
+@import url('./Sidebar.css');
+@import url('./Post.css');
+@import url('./Explore.css');
+@import url('./Chats.css');
+@import url('./Form.css');
+@import url('./Loader.css');
+@import url('./Skeleton.css');
+@import url('./misc/mobile.css');
+
+@import url('./misc/media.css');
