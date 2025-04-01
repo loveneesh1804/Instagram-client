@@ -254,7 +254,7 @@ const UserChats = ({
   useSocketEvents(socket, socketHandlers);
 
   return (
-    <div className="user-chat">
+    <main className="user-chat">
       <div className="user-chat-header">
         <div>
           {isMobile ? (
@@ -386,7 +386,7 @@ const UserChats = ({
           )}
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 

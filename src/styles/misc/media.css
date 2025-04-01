@@ -100,10 +100,12 @@
     .profile-header{
         margin: 10px 15px;
         gap: 20px;
+        width: 100%;
     }
     .profile-header > img{
         width: 77px;
         height: 77px;
+        object-fit: cover;
     }
     .profile-header > div > div:first-child{
         flex-direction: column;
@@ -248,5 +250,14 @@
     .more-post > .img-loader > img{
         width: 100%;
         height: 180px;
+    }
+    .message-box{
+        height: 100%;
+    }
+    .user-chat{
+        height: 100%;
+    }
+    .user-msg-section{
+        height: 77%;
     }
 }

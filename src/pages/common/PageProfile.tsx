@@ -179,7 +179,7 @@ const PageProfile = () => {
           />
           <div>
             <div>
-              <p style={{ width: "100%" }}>{user?.username}</p>
+              <p >{user?.username}</p>
               <span>
                 {id !== self?._id ? (
                   reqStatus === "NOT" ? (
