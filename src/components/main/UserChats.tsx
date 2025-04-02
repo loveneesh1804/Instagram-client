@@ -63,7 +63,7 @@ const UserChats = ({
 
   const { isLoading, data } = useGetChatDetailsQuery({
     chatId,
-    populate: false,
+    populate: true,
   });
 
   const { data: dbMsg, isFetching } = useGetAllMessagesQuery({
@@ -253,7 +253,7 @@ const UserChats = ({
 
   useSocketEvents(socket, socketHandlers);
 
-  return (
+  return chatData ? (
     <main className="user-chat">
       <div className="user-chat-header">
         <div>
@@ -263,30 +263,30 @@ const UserChats = ({
             </span>
           ) : undefined}
           <div
-          onClick={() =>
-            handleNavigate(
-              chatData.groupMembers.filter((el) => el._id !== user._id)[0]._id
-            )
-          }
-        >
-          {chatData.groupChats ? (
-            <div className="group-avatar">
-              {chatData.avatar.map((el) => (
-                <img src={el !== Null ? el : User} key={el} alt="group-ico" />
-              ))}
-            </div>
-          ) : (
-            <img
-              src={chatData?.avatar[0] !== Null ? chatData?.avatar[0] : User}
-              alt="user-ico"
-            />
-          )}
-          <p>
-            {chatData?.groupName !== Null
-              ? chatData.groupName
-              : formatGroupMemberName(chatData.groupMembers)}
-          </p>
-        </div>
+            onClick={() =>
+              handleNavigate(
+                chatData.groupMembers.filter((el) => el._id !== user._id)[0]._id
+              )
+            }
+          >
+            {chatData?.groupChats ? (
+              <div className="group-avatar">
+                {chatData.avatar.map((el) => (
+                  <img src={el !== Null ? el : User} key={el} alt="group-ico" />
+                ))}
+              </div>
+            ) : (
+              <img
+                src={chatData?.avatar[0] !== Null ? chatData?.avatar[0] : User}
+                alt="user-ico"
+              />
+            )}
+            <p>
+              {chatData?.groupName !== Null
+                ? chatData.groupName
+                : formatGroupMemberName(chatData.groupMembers)}
+            </p>
+          </div>
         </div>
         <span
           onClick={() => setShowChatsInfo((prev) => !prev)}
@@ -387,6 +387,8 @@ const UserChats = ({
         </div>
       </div>
     </main>
+  ) : (
+    <div></div>
   );
 };
 

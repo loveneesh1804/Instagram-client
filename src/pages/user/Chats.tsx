@@ -16,7 +16,7 @@ import {
   useDeleteChatMutation,
   useMyChatsQuery,
 } from "../../redux/api/chat.api";
-import { closeChatMask, openChatMask } from "../../redux/slice/chatmask";
+import { openChatMask } from "../../redux/slice/chatmask";
 import { IRootState } from "../../redux/store";
 import { GetSocket } from "../../Socket";
 import { IMessageSocketType, IMyChats, IRealTimeMsg } from "../../types";
@@ -69,6 +69,8 @@ const Chats = () => {
         return dateB.getTime() - dateA.getTime();
       });
       setChat(sortedChats);
+    }else{
+      setChat([]);
     }
   }, [data, lastMessage]);
 
@@ -101,8 +103,8 @@ const Chats = () => {
     if (!chatData) return;
     try {
       const { error } = await deleteChat(chatData._id);
+      refetch();
       if (!error) {
-        refetch();
         setSelectedUser("");
         return setSelected(false);
       }
@@ -230,7 +232,7 @@ const Chats = () => {
                     : "100%",
               }}
             >
-              {!selected ? (
+              {!selected && !selectedUser.length ? (
                 <div className="no-usr-selected">
                   <IoNoMessageIco />
                   <h3>Your Messages</h3>
