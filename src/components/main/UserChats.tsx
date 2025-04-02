@@ -63,7 +63,7 @@ const UserChats = ({
 
   const { isLoading, data } = useGetChatDetailsQuery({
     chatId,
-    populate: true,
+    populate: false,
   });
 
   const { data: dbMsg, isFetching } = useGetAllMessagesQuery({
@@ -81,6 +81,7 @@ const UserChats = ({
   const navigate = useNavigate();
 
   useEffect(() => {
+    if(!chatId.length || !chatData) return setSelected(false);
     dispatch(addChatId(chatId));
     dispatch(removeMsgNotification({ chatId }));
 

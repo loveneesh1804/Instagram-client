@@ -80,13 +80,15 @@ const Chats = () => {
   useSocketEvents(socket, socketListner);
 
   const handleSelectChat = (el: IMyChats) => {
-    if (!selected) {
+    if (!selected && el._id.length) {
       setSelected(true);
       setChatData(el);
       return setSelectedUser(el._id);
     }
-    setChatData(el);
-    return setSelectedUser(el._id);
+    if(el._id.length){
+      setChatData(el);
+      return setSelectedUser(el._id);
+    }
   };
 
   const getNewMsgCount = (id: string) => {
