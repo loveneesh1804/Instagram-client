@@ -56,7 +56,7 @@ const MoPostRender = ({data} : {data:IPostType}) => {
         if (alreadyComment) setAlreadyComment(true);
         else setAlreadyComment(false);
       }
-    }, [id,post]);
+    }, [post]);
   
     const socket = GetSocket();
   
@@ -80,24 +80,25 @@ const MoPostRender = ({data} : {data:IPostType}) => {
           receiver: post.userId._id,
           content: "",
         };
-        if (data?.message === "Post Liked" && user._id !== post.userId._id) {
+        if (data?.message === "Post Liked") {
           setLikeCount((prev) => ++prev);
-          socket.emit(NEW_NOTIFICATION, socketPayload);
+          user._id !== post.userId._id && socket.emit(NEW_NOTIFICATION, socketPayload);
         } else if (
-          data?.message === "Post Unliked" &&
-          user._id !== post.userId._id
+          data?.message === "Post Unliked"
         ) {
           setLikeCount((prev) => --prev);
-          const payload = {
-            post: {
-              _id: post?._id,
-              attachment: post?.resources[0].url,
-            },
-            type: "COMMENT",
-            receiver: post?.userId._id,
-          };
-          dispatch(deleteReqNotification());
-          socket.emit(DELETE_NOTIFICATION, payload);
+          if(user._id !== post.userId._id){
+            const payload = {
+              post: {
+                _id: post?._id,
+                attachment: post?.resources[0].url,
+              },
+              type: "COMMENT",
+              receiver: post?.userId._id,
+            };
+            dispatch(deleteReqNotification());
+            socket.emit(DELETE_NOTIFICATION, payload);
+          }
         }
         if (data) {
           refetch ? dispatch(resetRefetch()) : dispatch(refetchPost());
@@ -192,11 +193,13 @@ const MoPostRender = ({data} : {data:IPostType}) => {
                 </span>
               ) : undefined}
               {!alreadyComment ? (
-                <input
-                  onClick={() => handlePost(data._id)}
+                <span onClick={() => handlePost(data._id)}>
+                  <input
                   type="text"
+                  disabled
                   placeholder="Add a comment..."
                 />
+                </span>
               ) : undefined}
             </div>
           </div>

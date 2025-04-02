@@ -271,4 +271,8 @@
         width: 100%;
         bottom: 15px;
     }
+
+    .more-post-box + .main-footer{
+        margin-top: 20px;
+    }
 }

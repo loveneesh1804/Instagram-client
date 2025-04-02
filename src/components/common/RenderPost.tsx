@@ -112,10 +112,10 @@ const RenderPost = ({ data }: { data: IPostTypeFeed }) => {
     }
   };
 
-  const handleShowLikes = (i:string) => {
+  const handleShowLikes = (i: string) => {
     setShowLikes(true);
     setId(i);
-  }
+  };
   return (
     <>
       {isMobile ? (
@@ -167,7 +167,9 @@ const RenderPost = ({ data }: { data: IPostTypeFeed }) => {
             <IoSavedPostOutline />
           </div>
           <b
-            onClick={() => (likeCount ? handleShowLikes(data._id) : handleShowLikes(data._id))}
+            onClick={() =>
+              likeCount ? handleShowLikes(data._id) : handleShowLikes(data._id)
+            }
             style={{ cursor: "pointer" }}
           >
             {likeCount} likes
@@ -196,11 +198,9 @@ const RenderPost = ({ data }: { data: IPostTypeFeed }) => {
               </span>
             ) : undefined}
             {!alreadyComment ? (
-              <input
-                onClick={() => handlePost(data._id)}
-                type="text"
-                placeholder="Add a comment..."
-              />
+              <span onClick={() => handlePost(data._id)}>
+                <input disabled type="text" placeholder="Add a comment..." />
+              </span>
             ) : undefined}
           </div>
         </div>

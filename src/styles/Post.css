@@ -139,9 +139,10 @@
   font-size: 14.5px;
   gap: 8px;
 }
-.comments > input {
+.comments  input {
   border: none;
   outline: none;
+  pointer-events: none;
   font-size: 14.5px;
 }
 
@@ -1123,4 +1124,9 @@ li {
 }
 .more-post > div:hover .post-counts{
   visibility: visible;
+}
+
+.post-bar{
+  align-items: center;
+  justify-content: center;
 }
