@@ -176,10 +176,15 @@
 
     .chats{
         width: 100%;
+        overflow-x: hidden;
     }
     .chats-ppl{
         width: 100% !important;
         padding-top: 0px;
+        border: none;
+    }
+    .chats-info{
+        border: none;
     }
     .main-msg-section > div{
         max-width: 200px !important;
@@ -259,5 +264,11 @@
     }
     .user-msg-section{
         height: 77%;
+    }
+
+    .chat-mask-btn{
+        position: absolute;
+        width: 100%;
+        bottom: 15px;
     }
 }

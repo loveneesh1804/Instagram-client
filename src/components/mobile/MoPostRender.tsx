@@ -41,6 +41,22 @@ const MoPostRender = ({data} : {data:IPostType}) => {
       setLikeCount(data.likes.length);
       if (data.caption.length < 80) setShowCaption(true);
     }, []);
+
+    useEffect(() => {
+      if (post) {
+        const alreadyLiked = post.likes.find((el) => el._id === user._id);
+        if (alreadyLiked) {
+          setIsLiked(true);
+        } else {
+          setIsLiked(false);
+        }
+        const alreadyComment = post!.comments.find(
+          (el) => el.user._id === user._id
+        );
+        if (alreadyComment) setAlreadyComment(true);
+        else setAlreadyComment(false);
+      }
+    }, [id,post]);
   
     const socket = GetSocket();
   
