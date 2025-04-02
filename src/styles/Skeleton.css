@@ -72,6 +72,7 @@
     display: flex;
     flex-direction: column;
     gap: 60px;
+    width: 100%;
 }
 .suggest-skeleton{
     display: flex;

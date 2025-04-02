@@ -263,7 +263,7 @@
         height: 100%;
     }
     .user-msg-section{
-        height: 77%;
+        height: 79dvh;
     }
 
     .chat-mask-btn{
@@ -272,7 +272,7 @@
         bottom: 15px;
     }
 
-    .more-post-box + .main-footer{
+    .user-posts > .main-footer{
         margin-top: 20px;
     }
 }

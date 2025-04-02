@@ -205,14 +205,14 @@
   font-size: 15px;
 }
 .user-msg-section {
-  height: 79vh;
+  height: 79dvh;
   overflow-y: scroll;
   display: flex;
   flex-direction: column-reverse;
   scroll-behavior: smooth;
 }
 .dummy{
-  height: 79vh;
+  height: 79dvh;
   overflow-y: scroll;
 }
 svg:hover {
