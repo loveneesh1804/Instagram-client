@@ -20,7 +20,7 @@ import {
 } from "../../redux/api/user.api";
 import { openMask } from "../../redux/slice/mask";
 import { IPostType, IUserProfile, ResponseCommonType } from "../../types";
-import { Null, toOriginalStr } from "../../utlis";
+import { Null, toOriginalStr, transformImage } from "../../utlis";
 import { IRootState } from "../../redux/store";
 import BigSpinner from "../../utils/loaders/BigSpinner";
 import { useNavigate, useParams } from "react-router-dom";
@@ -174,7 +174,7 @@ const PageProfile = () => {
       <main className="profile-box">
         <div className="profile-header">
           <img
-            src={user?.avatar.url !== Null ? user?.avatar.url : User}
+            src={user?.avatar.url !== Null ? transformImage(user?.avatar.url,300) : User}
             alt="user-ico"
           />
           <div>

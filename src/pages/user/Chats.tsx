@@ -20,7 +20,7 @@ import { openChatMask } from "../../redux/slice/chatmask";
 import { IRootState } from "../../redux/store";
 import { GetSocket } from "../../Socket";
 import { IMessageSocketType, IMyChats, IRealTimeMsg } from "../../types";
-import { formatGroupMemberName, Null } from "../../utlis";
+import { formatGroupMemberName, Null, transformImage } from "../../utlis";
 import { useNavigate } from "react-router-dom";
 
 const Chats = () => {
@@ -29,7 +29,7 @@ const Chats = () => {
   }, []);
 
   const [selected, setSelected] = useState<boolean>(false);
-  const { users } = useSelector((state: IRootState) => state.chatMask);
+  const { users,chatId,chat: newChat } = useSelector((state: IRootState) => state.chatMask);
 
   const [selectedUser, setSelectedUser] = useState<string>("");
   const [chatData, setChatData] = useState<IMyChats>();
@@ -40,7 +40,11 @@ const Chats = () => {
   const socket = GetSocket();
 
   useEffect(() => {
-    users.length && setSelected(true);
+    if(chatId.length){
+      setSelected(true);
+      setSelectedUser(chatId);
+      setChatData(newChat as IMyChats);
+    }
   }, [users]);
 
   const { data, refetch } = useMyChatsQuery("");
@@ -104,7 +108,7 @@ const Chats = () => {
   const handleDeleteChat = async () => {
     if (!chatData) return;
     try {
-      const { error } = await deleteChat(chatData._id);
+      const { error } = await deleteChat(selectedUser);
       refetch();
       if (!error) {
         setSelectedUser("");
@@ -150,7 +154,7 @@ const Chats = () => {
               </div>
               <div className="chat-msg-box">
                 <img
-                  src={user.avatar.url !== Null ? user.avatar.url : User}
+                  src={user.avatar.url !== Null ? transformImage(user.avatar.url,600) : User}
                   alt="user-ico"
                 />
                 <h4>Messages</h4>
@@ -167,14 +171,14 @@ const Chats = () => {
                             {el.avatar.map((el) => (
                               <img
                                 key={el}
-                                src={el !== Null ? el : User}
+                                src={el !== Null ? transformImage(el,300) : User}
                                 alt="avatar"
                               />
                             ))}
                           </div>
                         ) : (
                           <img
-                            src={el?.avatar[0] !== Null ? el?.avatar[0] : User}
+                            src={el?.avatar[0] !== Null ? transformImage(el?.avatar[0],100) : User}
                             alt="user-ico"
                           />
                         )}
@@ -281,7 +285,7 @@ const Chats = () => {
                 ? chatData.groupMembers.map((el) => (
                     <div onClick={() => navigate(`/${el._id}`)} key={el._id}>
                       <img
-                        src={el.avatar.url !== Null ? el.avatar.url : User}
+                        src={el.avatar.url !== Null ? transformImage(el.avatar.url,300) : User}
                         alt="profile-ico"
                       />
                       <div>

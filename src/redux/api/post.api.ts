@@ -23,8 +23,8 @@ export const postApi = createApi({
       query: (page) => `my?page=${page}`,
       providesTags: ["post"],
     }),
-    morePost: builder.query<MorePostResponse,string>({
-      query: (id) => `more-post?id=${id}`,
+    morePost: builder.query<MorePostResponse,{id : string,user: string}>({
+      query: ({id,user}) => `more-post?id=${id}&user=${user}`,
     }),
     explorePost: builder.query<ExplorePostResponse,number>({
       query: (page) => `explore?page=${page}`,

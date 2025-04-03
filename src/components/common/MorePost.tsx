@@ -6,8 +6,8 @@ import { IoComment, IoHeart, IoLayerFill } from "../icon/Icons";
 const MorePost = ({ id }: { id: string }) => {
   const navigate = useNavigate();
   const {id : postId} = useParams();
-  const { data, isError } = useMorePostQuery(postId || '');
-
+  const { data, isError } = useMorePostQuery({id: postId || '',user: id});
+  console.log(postId);
   useEffect(() => {
     const imgLoaders = document.querySelectorAll(".img-loader");
     imgLoaders.forEach((el) => {

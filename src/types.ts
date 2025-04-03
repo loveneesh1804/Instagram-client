@@ -32,6 +32,11 @@ export interface ResponseCommonType {
   success: boolean;
 }
 
+export interface NewChatResponse extends ResponseCommonType{
+  chatId: string;
+  chat: IMyChats;
+}
+
 export interface IUpadtedUserResponse extends ResponseCommonType {
   data: IUserProfile;
 }

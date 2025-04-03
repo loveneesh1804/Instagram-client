@@ -1,5 +1,5 @@
 import { fetchBaseQuery, createApi } from "@reduxjs/toolkit/query/react";
-import { IGetChatDetails, IMessageResponse, IMyChatsResponse, ResponseCommonType } from "../../types";
+import { IGetChatDetails, IMessageResponse, IMyChatsResponse, NewChatResponse, ResponseCommonType } from "../../types";
 
 export const chatApi = createApi({
   reducerPath: "chatApi",
@@ -9,7 +9,7 @@ export const chatApi = createApi({
   }),
   tagTypes: ["chats", "message"],
   endpoints: (builder) => ({
-    newChat: builder.mutation<ResponseCommonType, {members :string[]}>({
+    newChat: builder.mutation<NewChatResponse, {members :string[]}>({
       query: (data) => {
         return {
           url: "new",

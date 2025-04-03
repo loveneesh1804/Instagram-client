@@ -182,8 +182,7 @@ const Postusers = () => {
     if (error) {
       document.title = "Page couldn't load • Instagram";
     }
-  }, [id, error,refetch]);
-
+  }, [id, error,post]);
   useEffect(() => {
     if (post) {
       const alreadyLiked = post.likes.find((el) => el._id === user._id);

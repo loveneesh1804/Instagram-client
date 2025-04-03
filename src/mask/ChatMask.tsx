@@ -11,7 +11,6 @@ import { IRootState } from "../redux/store";
 import { closeChatMask } from "../redux/slice/chatmask";
 import { useNewChatMutation } from "../redux/api/chat.api";
 
-
 const ChatMask = () => {
   //States
   const [search, setSearch] = useState<string>("");
@@ -20,40 +19,45 @@ const ChatMask = () => {
   const [users, setUsers] = useState<ISearchUsersResponse[]>([]);
 
   //Redux
-  const data = useSelector((state:IRootState)=>state.chatMask);
+  const data = useSelector((state: IRootState) => state.chatMask);
   const dispatch = useDispatch();
   const [trigger] = useNewChatMutation();
-
 
   //Handlers
   const handleOutside = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if ((e.target as HTMLDivElement).className === "chat-mask-box") {
-      setSearch('');
+      setSearch("");
       dispatch(closeChatMask([]));
     }
   };
   const handleSelectUser = (id: string) => {
     selectedUser.includes(id)
-      ? setSelectedUser(selectedUser.filter(el=>el!==id))
+      ? setSelectedUser(selectedUser.filter((el) => el !== id))
       : setSelectedUser((prev) => [...prev, id]);
   };
-  const handleChat = async() => {
-    if(!selectedUser.length) return;
+  const handleChat = async () => {
+    if (!selectedUser.length) return;
 
-    try{
+    try {
       const payload = {
-        members: selectedUser
-      }
-      const {data} = await trigger(payload);
-      if(data?.success){
-        dispatch(closeChatMask(selectedUser));
-        setSearch('');
+        members: selectedUser,
+      };
+      const { data } = await trigger(payload);
+      if (data?.success) {
+        dispatch(
+          closeChatMask({
+            users: selectedUser,
+            chatId: data.chatId,
+            chat: data.chat,
+          })
+        );
+        setSearch("");
         return setSelectedUser([]);
       }
-    }catch(e){
+    } catch (e) {
       return e;
     }
-  }
+  };
 
   //Hooks
   const [searchUsers] = useLazySearchQuery();
@@ -68,7 +72,7 @@ const ChatMask = () => {
           if (data?.data.length) {
             setLoading(false);
             return setUsers(data.data);
-          }else{
+          } else {
             setUsers([]);
             return setLoading(false);
           }
@@ -111,31 +115,44 @@ const ChatMask = () => {
             </div>
           ) : (
             <div className="searched-result">
-              {users.length && !loading ? users.map((el) => (
-                <div className="search-res" key={el._id} onClick={() => handleSelectUser(el._id)}>
-                  <div className="res-user-info">
-                    <img
-                      src={el.avatar.url !== Null ? el.avatar.url : User}
-                      alt="user-ico"
-                    />
-                    <p>{el.name}</p>
-                  </div>
+              {users.length && !loading ? (
+                users.map((el) => (
                   <div
-                    className={
-                      selectedUser.includes(el._id)
-                        ? "checkbox tick"
-                        : "checkbox"
-                    }
-                  ></div>
-                </div>
-              )) : !loading && !users.length ? <p >No account found.</p> : 
+                    className="search-res"
+                    key={el._id}
+                    onClick={() => handleSelectUser(el._id)}
+                  >
+                    <div className="res-user-info">
+                      <img
+                        src={el.avatar.url !== Null ? el.avatar.url : User}
+                        alt="user-ico"
+                      />
+                      <p>{el.name}</p>
+                    </div>
+                    <div
+                      className={
+                        selectedUser.includes(el._id)
+                          ? "checkbox tick"
+                          : "checkbox"
+                      }
+                    ></div>
+                  </div>
+                ))
+              ) : !loading && !users.length ? (
+                <p>No account found.</p>
+              ) : (
                 <ChatResSkel />
-              }
+              )}
             </div>
           )}
         </div>
         <div className="chat-mask-btn">
-          <button onClick={handleChat} disabled={selectedUser.length ? false : true}>Chat</button>
+          <button
+            onClick={handleChat}
+            disabled={selectedUser.length ? false : true}
+          >
+            Chat
+          </button>
         </div>
       </div>
     </div>

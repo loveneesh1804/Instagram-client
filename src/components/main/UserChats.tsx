@@ -81,7 +81,7 @@ const UserChats = ({
   const navigate = useNavigate();
 
   useEffect(() => {
-    if(!chatId.length || !chatData) return setSelected(false);
+    if(!chatData) return setSelected(false);
     dispatch(addChatId(chatId));
     dispatch(removeMsgNotification({ chatId }));
 

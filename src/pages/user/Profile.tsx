@@ -18,7 +18,7 @@ import { useLazyLogoutQuery, useLazyMyProfileQuery } from "../../redux/api/user.
 import { openMask } from "../../redux/slice/mask";
 import { login, logout } from "../../redux/slice/user.slice";
 import { IPostType, IUserProfile } from "../../types";
-import { Null, toOriginalStr } from "../../utlis";
+import { Null, toOriginalStr, transformImage } from "../../utlis";
 import { IRootState } from "../../redux/store";
 import BigSpinner from "../../utils/loaders/BigSpinner";
 import { useNavigate } from "react-router-dom";
@@ -132,7 +132,7 @@ const Profile = () => {
       <main className="profile-box">
         <div className="profile-header">
           <img
-            src={user?.avatar.url !== Null ? user?.avatar.url : User}
+            src={user?.avatar.url !== Null ? transformImage(user?.avatar.url,300) : User}
             alt="user-ico"
           />
           <div>
